@@ -8,6 +8,45 @@ using System.Threading.Tasks;
 
 namespace SimplyExcel.NET.Builder
 {
+    public class ExcelColumMapBuilder<T> where T : class
+    {
+        private static readonly ICollection<ExcelColumnConfiguration> _maps = new HashSet<ExcelColumnConfiguration>();
+        public ExcelColumMapBuilder()
+        {
+            var properties = typeof(T).GetProperties()
+                .Where(x => x.PropertyType.Assembly == typeof(object).Assembly)
+                .ToArray();
+
+            for (int i = 0; i < properties.Length; i++)
+            {
+                var prop = properties[i];
+                _maps.Add(new ExcelColumnConfiguration
+                {
+                    Property = prop,
+                    ColumnName = prop.Name
+                });
+            }
+        }
+
+        public void For<TProperty>(Expression<Func<T, TProperty>> expression, int columnIndex, string columnName = null)
+        {
+            var propertyName = ((MemberExpression)expression.Body).Member.Name;
+            var propertyMatch = _maps.FirstOrDefault(x => x.ColumnName == propertyName);
+            if (propertyMatch != null)
+            {
+                propertyMatch.ColumnIndex = columnIndex;
+                if (!string.IsNullOrEmpty(columnName))
+                    propertyMatch.ColumnName = columnName;
+            }
+        }
+
+        public IReadOnlyCollection<ExcelColumnConfiguration> GetIndexMap()
+        {
+            return _maps.ToList().AsReadOnly();
+        }
+    }
+
+
     public class ExcelColumnIndexMap<T>
     {
         private static readonly Dictionary<PropertyInfo, int> _matches = new Dictionary<PropertyInfo, int>();

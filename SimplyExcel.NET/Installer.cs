@@ -7,7 +7,7 @@ namespace SimplyExcel.NET
     {
         public static IServiceCollection AddSimplyExcel(this IServiceCollection services)
         {
-            services.AddTransient<ISimplyExcel, DefaultSimplyExcel>();
+            services.AddTransient<ISimplyExcel, SimplyExcel>();
             return services;
         }
 

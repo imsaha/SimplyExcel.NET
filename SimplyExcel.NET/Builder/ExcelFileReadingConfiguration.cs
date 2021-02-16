@@ -8,6 +8,22 @@ using System.Threading.Tasks;
 
 namespace SimplyExcel.NET.Builder
 {
+    public class ExcelConfiguration<T> where T : class
+    {
+        public int StartingRowIndex { get; set; }
+        public int? HeaderRowIndex { get; set; }
+        public CultureInfo Culture { get; set; }
+        public Action<ExcelColumMapBuilder<T>> MapBuilderAction { get; set; }
+
+        public IReadOnlyCollection<ExcelColumnConfiguration> GetColumnMaps()
+        {
+            var columnMapsObj = new ExcelColumMapBuilder<T>();
+            MapBuilderAction?.Invoke(columnMapsObj);
+
+            return columnMapsObj.GetIndexMap();
+        }
+    }
+
     public class ExcelFileReadingConfiguration<T>
     {
         public int StartingRowIndex { get; set; }

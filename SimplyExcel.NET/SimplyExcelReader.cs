@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 
 namespace SimplyExcel.NET
 {
-    public class DefaultSimplyExcel : ISimplyExcel
+    public static class SimplyExcelReader
     {
-        public IEnumerable<T> Read<T>(Stream stream, Action<ExcelFileReadingConfiguration<T>> fileReadingConfigurationAction = null) where T : class
+        public static IEnumerable<T> ReadFromStream<T>(Stream stream, Action<ExcelFileReadingConfiguration<T>> fileReadingConfigurationAction = null) where T : class
         {
             if (stream == null || stream.Length == 0)
                 throw new ArgumentNullException(nameof(stream));
@@ -72,5 +72,6 @@ namespace SimplyExcel.NET
 
             return result;
         }
+
     }
 }
