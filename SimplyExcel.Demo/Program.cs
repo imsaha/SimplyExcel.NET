@@ -32,7 +32,7 @@ namespace SimplyExcel.Demo
 
             using (var stream = new FileStream("demo.xlsx", FileMode.OpenOrCreate, FileAccess.Write))
             {
-                SimplyExcelWriter.Write(data, stream, options =>
+                SimplyExcelWriter.Write(stream, data, options =>
                 {
                     options.ColumnMapBuilder = map =>
                     {
