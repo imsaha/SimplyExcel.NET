@@ -84,4 +84,18 @@
 
 ```
 
+### simple read
+```C#
+
+              using (var fileStream = File.OpenRead("demo_simple.xlsx"))
+              {
+                  var readData = SimplyExcelReader.ReadFromStream<DemoData>(fileStream);
+              }
+
+```
+
+
+
+
+
 
