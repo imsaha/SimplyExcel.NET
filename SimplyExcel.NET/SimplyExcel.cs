@@ -14,9 +14,14 @@ namespace SimplyExcel.NET
 {
     public class SimplyExcel : ISimplyExcel
     {
-        public IEnumerable<T> Read<T>(Stream stream, Action<ExcelFileReadingConfiguration<T>> fileReadingConfigurationAction = null) where T : class
+        public IEnumerable<T> Read<T>(Stream stream, Action<ExcelReadingConfiguration<T>> excelConfigurationAction = null) where T : class
         {
-            return SimplyExcelReader.ReadFromStream(stream, fileReadingConfigurationAction);
+            return SimplyExcelReader.ReadFromStream(stream, excelConfigurationAction);
+        }
+
+        public void Write<T>(Stream stream, IEnumerable<T> items, Action<ExcelWritingConfiguration<T>> excelConfigurationAction = null) where T : class
+        {
+            SimplyExcelWriter.Write(stream, items, excelConfigurationAction);
         }
     }
 }

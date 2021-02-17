@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimplyExcel.NET", "SimplyExcel.NET\SimplyExcel.NET.csproj", "{FC7C25D6-B58E-47F6-9D59-3F6D5A713786}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimplyExcel.Demo", "SimplyExcel.Demo\SimplyExcel.Demo.csproj", "{C6855C64-1315-4F9A-862E-3F9123DDC319}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{FC7C25D6-B58E-47F6-9D59-3F6D5A713786}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC7C25D6-B58E-47F6-9D59-3F6D5A713786}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC7C25D6-B58E-47F6-9D59-3F6D5A713786}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6855C64-1315-4F9A-862E-3F9123DDC319}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6855C64-1315-4F9A-862E-3F9123DDC319}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6855C64-1315-4F9A-862E-3F9123DDC319}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6855C64-1315-4F9A-862E-3F9123DDC319}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
