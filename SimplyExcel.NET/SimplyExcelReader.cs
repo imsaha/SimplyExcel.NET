@@ -12,16 +12,16 @@ using System.Threading.Tasks;
 
 namespace SimplyExcel.NET
 {
-    public class DefaultSimplyExcel : ISimplyExcel
+    public static class SimplyExcelReader
     {
-        public IEnumerable<T> Read<T>(Stream stream, Action<ExcelFileReadingConfiguration<T>> fileReadingConfigurationAction = null) where T : class
+        public static IEnumerable<T> ReadFromStream<T>(Stream stream, Action<ExcelReadingConfiguration<T>> excelMapBuilderAction = null) where T : class
         {
             if (stream == null || stream.Length == 0)
                 throw new ArgumentNullException(nameof(stream));
 
-            var configuration = new ExcelFileReadingConfiguration<T>();
-            fileReadingConfigurationAction(configuration);
-            var columnMaps = configuration.GetColumnMaps();
+            var configuration = new ExcelReadingConfiguration<T>();
+            excelMapBuilderAction(configuration);
+            var columnMaps = (List<ExcelOnReadingColumnConfiguration>)configuration.GetMaps();
 
             var result = new List<T>();
             stream.Position = 0;
@@ -36,8 +36,8 @@ namespace SimplyExcel.NET
                     for (int matchIndex = 0; matchIndex < columnMaps.Count; matchIndex++)
                     {
                         var match = columnMaps.ElementAt(matchIndex);
-                        var property = match.Key;
-                        var cell = row.GetCell(match.Value, MissingCellPolicy.RETURN_NULL_AND_BLANK);
+                        var property = match.Property;
+                        var cell = row.GetCell(match.ColumnIndex, MissingCellPolicy.RETURN_NULL_AND_BLANK);
                         var cellData = cell?.ToString();
                         if (cell == null || string.IsNullOrEmpty(cellData))
                         {
@@ -72,5 +72,6 @@ namespace SimplyExcel.NET
 
             return result;
         }
+
     }
 }

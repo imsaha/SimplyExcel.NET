@@ -10,7 +10,7 @@ namespace SimplyExcel.NET
 {
     public interface ISimplyExcel
     {
-        IEnumerable<T> Read<T>(Stream stream, Action<ExcelFileReadingConfiguration<T>> fileReadingConfigurationAction = null) where T : class;
-
+        IEnumerable<T> Read<T>(Stream stream, Action<ExcelReadingConfiguration<T>> excelConfigurationAction = null) where T : class;
+        void Write<T>(Stream stream, IEnumerable<T> items, Action<ExcelWritingConfiguration<T>> excelConfigurationAction = null) where T : class;
     }
 }
