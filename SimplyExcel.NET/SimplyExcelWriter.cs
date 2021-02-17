@@ -20,7 +20,9 @@ namespace SimplyExcel.NET
                 throw new NullReferenceException("expected parameter is null.");
 
             var configuration = new ExcelWritingConfiguration<T>();
-            excelMapBuilderAction(configuration);
+
+            if (excelMapBuilderAction != null)
+                excelMapBuilderAction(configuration);
 
             var xlBook = new XSSFWorkbook();
             var sheet1 = xlBook.CreateSheet(configuration.SheetName ?? "Sheet1");

@@ -6,31 +6,58 @@ using System.IO;
 
 namespace SimplyExcel.Demo
 {
-    public enum Test
-    {
-        Demo,
-        Demo2,
-        Demo3
-    }
     class Program
     {
         static void Main(string[] args)
         {
-            var data = new List<SampleData>();
-            data.Add(new SampleData()
+            List<SampleData> data = new List<SampleData>
             {
-                FirstName = "demo",
-                LastName = "a test",
-                DateOfBirth = new SampleDate()
+                new SampleData()
                 {
-                    Year = 1990,
-                    Month = 12,
-                    Day = 5
+                    FirstName = "demo",
+                    LastName = "a test",
+                    DateOfBirth = new SampleDate()
+                    {
+                        Year = 1990,
+                        Month = 12,
+                        Day = 5
+                    },
+                    Demo = Test.Demo3
                 },
-                Demo = Test.Demo3
-            });
+                new SampleData()
+                {
+                    FirstName = "demo2",
+                    LastName = "an another test",
+                    DateOfBirth = new SampleDate()
+                    {
+                        Year = 1986,
+                        Month = 06,
+                        Day = 9
+                    },
+                    Demo = Test.Demo3
+                }
+            };
 
-            using (var stream = new FileStream("demo.xlsx", FileMode.OpenOrCreate, FileAccess.Write))
+
+            buildSimple(data, "demo_simple.xlsx");
+            //buildAdvance(data, "demo_advance.xlsx");
+
+
+            Console.WriteLine("Hello World!");
+        }
+
+
+        static void buildSimple(List<SampleData> data, string fileName)
+        {
+            using (var stream = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.Write))
+            {
+                SimplyExcelWriter.Write(stream, data);
+            }
+        }
+
+        static void buildAdvance(List<SampleData> data, string fileName)
+        {
+            using (var stream = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.Write))
             {
                 SimplyExcelWriter.Write(stream, data, options =>
                 {
@@ -54,7 +81,6 @@ namespace SimplyExcel.Demo
                 });
             }
 
-            Console.WriteLine("Hello World!");
         }
     }
 }

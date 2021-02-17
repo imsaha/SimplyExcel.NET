@@ -9,6 +9,12 @@ using System.Threading.Tasks;
 
 namespace SimplyExcel.Demo
 {
+    public enum Test
+    {
+        Demo,
+        Demo2,
+        Demo3
+    }
     public class SampleData
     {
         public string FirstName { get; set; }
